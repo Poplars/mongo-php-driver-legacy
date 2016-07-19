@@ -204,3 +204,33 @@ Derick Rethans
 Taneli Leppä
 
 * Provided a patch for PHP-706 to swap out select() for poll().
+* 
+
+Linux上安装 MongoDB PHP扩展
+在终端上安装
+你可以在linux中执行以下命令来安装MongoDB 的 PHP 扩展驱动
+
+$ sudo pecl install mongo
+使用php的pecl安装命令必须保证网络连接可用以及root权限。
+
+安装手册
+如果你想通过源码来编译扩展驱动。你必须手动编译源码包，这样做的好是最新修正的bug包含在源码包中。
+
+你可以在Github上下载MongoDB PHP驱动包。访问github网站然后搜索"mongo php driver"(下载地址：https://github.com/mongodb/mongo-php-driver)，下载该源码包，然后执行以下命令：
+
+$ tar zxvf mongodb-mongodb-php-driver-<commit_id>.tar.gz
+$ cd mongodb-mongodb-php-driver-<commit_id>
+$ phpize
+$ ./configure
+$ sudo make install
+如果你的php是自己编译的，则安装方法如下(假设是编译在/usr/local/php目录中)：
+
+$ tar zxvf mongodb-mongodb-php-driver-<commit_id>.tar.gz
+$ cd mongodb-mongodb-php-driver-<commit_id>
+$ /usr/local/php/bin/phpize
+$ ./configure --with-php-config=/usr/local/php/bin/php-config
+$ sudo make install
+执行以上命令后，你需要修改php.ini文件，在php.ini文件中添加mongo配置，配置如下：
+
+extension=mongo.so
+注意：你需要指明 extension_dir 配置项的路径。
